@@ -25,3 +25,20 @@ class Book(Base):
     genre_id = Column(Integer, ForeignKey("genre.genre_id"))
     price = Column(Float)
     amount = Column(Integer)
+
+
+class City(Base):
+    __tablename__ = "city"
+
+    city_id = Column(Integer, primary_key=True)
+    name_city = Column(String)
+    days_delivery = Column(Integer)
+
+
+class Client(Base):
+    __tablename__ = "client"
+
+    client_id = Column(Integer, primary_key=True)
+    name_client = Column(String)
+    city_id = Column(Integer, ForeignKey("city.city_id"))
+    email = Column(String)
