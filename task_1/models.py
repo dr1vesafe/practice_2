@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy.sql import func
 from database import Base
 
 
@@ -42,3 +43,37 @@ class Client(Base):
     name_client = Column(String)
     city_id = Column(Integer, ForeignKey("city.city_id"))
     email = Column(String)
+
+
+class Buy(Base):
+    __tablename__ = "buy"
+
+    buy_id = Column(Integer, primary_key=True)
+    buy_description = Column(String, nullable=True)
+    client_id = Column(Integer, ForeignKey("client.client_id"))
+
+
+class BuyBook(Base):
+    __tablename__ = "buy_book"
+
+    buy_book_id = Column(Integer, primary_key=True)
+    buy_id = Column(Integer, ForeignKey("buy.buy_id"))
+    book_id = Column(Integer, ForeignKey("book.book_id"))
+    amount = Column(Integer, default=1)
+
+
+class Step(Base):
+    __tablename__ = "step"
+
+    step_id = Column(Integer, primary_key=True)
+    name_step = Column(String)
+
+
+class BuyStep(Base):
+    __tablename__ = "buy_step"
+
+    buy_step_id = Column(Integer, primary_key=True)
+    buy_id = Column(Integer, ForeignKey("buy.buy_id"))
+    step_id = Column(Integer, ForeignKey("step.step_id"))
+    date_step_beg = Column(DateTime(timezone=True), server_default=func.now())
+    date_step_end = Column(DateTime(timezone=True), nullable=True, onupdate=func.now())
