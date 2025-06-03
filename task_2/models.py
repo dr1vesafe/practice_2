@@ -1,5 +1,4 @@
-import datetime
-from sqlalchemy import Column, Integer, String, Numeric, Date, DateTime
+from sqlalchemy import Column, Integer, String, Numeric, Date, DateTime, func
 from database import Base
 
 
@@ -16,5 +15,5 @@ class SpimexTradingResults(Base):
     volume = Column(Numeric(20, 2))
     total = Column(Numeric(20, 2))
     date = Column(Date)
-    created_on = Column(DateTime, server_defaul=datetime.utcnow)
-    updated_on = Column(DateTime, server_defaul=datetime.utcnow, onupdate=datetime.utcnow)
+    created_on = Column(DateTime, server_default=func.now())
+    updated_on = Column(DateTime, server_default=func.now(), onupdate=func.now())
