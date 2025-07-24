@@ -2,5 +2,5 @@ sqlalchemy
 psycopg2
 dotenv
 pandas
-beautifulsoup4
 requests
+httpx
