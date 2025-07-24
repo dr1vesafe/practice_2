@@ -4,3 +4,4 @@ dotenv
 pandas
 requests
 httpx
+xlrd
